@@ -6,6 +6,7 @@ class Post{
     private $title;
     private $date;
     private $body;
+    public $polymorh;
 
     // Construct, this method is the first to be executed whenever an object is instantiated.
     public function __construct($t, $d, $b){
@@ -31,6 +32,16 @@ class Post{
         if(is_string($b)){
             $this->body = $b;
         }
+    }
+
+    // This method serves apply the concept of Polymorphism, it will immediately be replaced by itself on the extended object below.
+    public function setPolymorph(){
+        echo "I'll be replaced soon!";
+    }
+    
+    // This method will be called on the Polymorphism below.
+    public function polymorphReplacement(){
+        echo "Polymorphism was applied!";
     }
 
     // Getters
@@ -60,6 +71,10 @@ class Post{
 // This object inherits Post, just to be instantiated below as to exemplify the inheritance concept.
 class Inheritance extends Post{
 
+    public function setPolymorph(){
+        $this->polymorphReplacement();
+    }
+
 }
 
 // Receives inputs.
@@ -75,6 +90,8 @@ if(isset($_POST['submit'])){
     echo "Post Title: ".$post->getTitle()."<br>";
     echo "Post Date: ".$post->getDate()."<br>";
     echo "Post Body: ".$post->getBody()."<br>";
+    $post->setPolymorph();
+
 
 }else{
 echo "Nothing sent yet.";
