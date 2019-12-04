@@ -6,13 +6,14 @@ class Post{
     private $title;
     private $date;
     private $body;
-    public $polymorh;
+    public $polymorph;
 
     // Construct, this method is the first to be executed whenever an object is instantiated.
-    public function __construct($t, $d, $b){
+    public function __construct($t, $d, $b, $p){
         $this->setTitle($t);        
         $this->setDate($d);        
-        $this->setBody($b);        
+        $this->setBody($b);   
+        $this->setPolymorph($p);     
     }
 
     // Setters
@@ -34,14 +35,9 @@ class Post{
         }
     }
 
-    // This method serves apply the concept of Polymorphism, it will immediately be replaced by itself on the extended object below.
-    public function setPolymorph(){
+    // This method serves apply the concept of Polymorphism, it will immediately be replaced by itself on the extended object below, also, even if it's not used, it needs a parameter to look the same as the one which will replace it, otherwise it will throw an warning.
+    public function setPolymorph($p){
         echo "I'll be replaced soon!";
-    }
-    
-    // This method will be called on the Polymorphism below.
-    public function polymorphReplacement(){
-        echo "Polymorphism was applied!";
     }
 
     // Getters
@@ -57,6 +53,10 @@ class Post{
         return $this->body;
     }
 
+    public function getPolymorph(){
+        return $this->polymorph;
+    }
+
     // setDate helper.
     private function dateChecker($d){
         $date = explode('-',$d);
@@ -68,11 +68,14 @@ class Post{
     } 
 }
 
-// This object inherits Post, just to be instantiated below as to exemplify the inheritance concept.
+// This object inherits Post, it will to be instantiated below as to exemplify the inheritance concept.
 class Inheritance extends Post{
 
-    public function setPolymorph(){
-        $this->polymorphReplacement();
+    // It will receive the string on $_POST when it is called below and it will write it on the Post object's public property.
+    public function setPolymorph($p){
+        if(is_string($p)){
+            $this->polymorph = $p;
+        }
     }
 
 }
@@ -83,15 +86,15 @@ if(isset($_POST['submit'])){
     $t = addslashes($_POST["title"]);
     $d = addslashes($_POST["date"]);
     $b = addslashes($_POST["body"]);
+    $p = addslashes($_POST["polymorph"]);
 
     // Object instantiation.
-    $post = new Inheritance($t,$d,$b);
+    $post = new Inheritance($t,$d,$b,$p);
 
     echo "Post Title: ".$post->getTitle()."<br>";
     echo "Post Date: ".$post->getDate()."<br>";
     echo "Post Body: ".$post->getBody()."<br>";
-    $post->setPolymorph();
-
+    echo "Polymorphed Value: ".$post->getPolymorph();
 
 }else{
 echo "Nothing sent yet.";
@@ -109,5 +112,12 @@ echo "Nothing sent yet.";
 <label>Body: </label>
 <input type="textarea" name="body">
 
+<label>Polymorph: </label>
+<input type="textarea" name="polymorph">
+
 <input type="submit" name="submit">
 </form>
+
+<br>
+<br>
+<footer style="text-align:center">This snippet was made by Glori4n (<a href="https://glori4n.com" target="new">https://glori4n.com</a>)</footer>
