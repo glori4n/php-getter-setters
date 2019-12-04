@@ -65,17 +65,22 @@ class Post{
         $year = $date[0];
 
         return checkdate($month, $day, $year);
-    } 
+    }
+
+    // setPolymorph helper as a protected function, so it can only be used by its respective object and the ones that inherits it.
+    protected function polymorphString($p){
+        if(is_string($p)){
+            $this->polymorph = $p;
+        }
+    }
 }
 
 // This object inherits Post, it will to be instantiated below as to exemplify the inheritance concept.
 class Inheritance extends Post{
 
-    // It will receive the string on $_POST when it is called below and it will write it on the Post object's public property.
+    // It will receive the string on $_POST and it will send it to the protected polymorphString protected method.
     public function setPolymorph($p){
-        if(is_string($p)){
-            $this->polymorph = $p;
-        }
+       $this->polymorphString($p);
     }
 
 }
