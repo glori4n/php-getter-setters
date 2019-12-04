@@ -57,6 +57,11 @@ class Post{
     } 
 }
 
+// This object inherits Post, just to be instantiated below as to exemplify the inheritance concept.
+class Inheritance extends Post{
+
+}
+
 // Receives inputs.
 if(isset($_POST['submit'])){
 
@@ -65,7 +70,7 @@ if(isset($_POST['submit'])){
     $b = addslashes($_POST["body"]);
 
     // Object instantiation.
-    $post = new Post($t,$d,$b);
+    $post = new Inheritance($t,$d,$b);
 
     echo "Post Title: ".$post->getTitle()."<br>";
     echo "Post Date: ".$post->getDate()."<br>";
