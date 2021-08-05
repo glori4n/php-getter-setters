@@ -1,4 +1,4 @@
-<!-- This snippet was made by Glori4n(https://glori4n.com) -->
+<!-- This snippet was made by Glori4n(https://glori4n.net) -->
 
 <?php
 
@@ -125,4 +125,4 @@ echo "Nothing sent yet.";
 
 <br>
 <br>
-<footer style="text-align:center">This snippet was made by © Glori4n (<a href="https://glori4n.com" target="new">https://glori4n.com</a>)</footer>
+<footer style="text-align:center">This snippet was made by © Glori4n (<a href="https://glori4n.net" target="new">https://glori4n.net</a>)</footer>
